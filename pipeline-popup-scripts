@@ -1,0 +1,39 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building...'
+            }
+        }
+
+        stage('Approval for Test') {
+            steps {
+                script {
+                    input message: 'Approve to proceed to Testing?', ok: 'Yes, Proceed'
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+            }
+        }
+
+        stage('Approval for Deploy') {
+            steps {
+                script {
+                    input message: 'Approve to proceed to Deployment?', ok: 'Yes, Proceed'
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying...'
+            }
+        }
+    }
+}
